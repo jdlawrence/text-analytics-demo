@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import TextForm from './TextForm';
+import Analyze from './Analyze';
 import './App.scss';
 
 class App extends Component {
+  componentDidMount(){
+    console.log('ahsdf)');
+    Analyze();
+  }
+
   printText(text) {
     console.log('text', text);
   }
+
+  displayAnalysis(text) {
+
+  }
+
   render() {
     return (
       <div className="App">
