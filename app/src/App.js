@@ -4,13 +4,21 @@ import Analyze from './Analyze';
 import './App.scss';
 
 class App extends Component {
-  componentDidMount(){
-    console.log('ahsdf)');
-    Analyze();
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
   }
 
-  printText(text) {
+  // componentDidMount(){
+  //   console.log('ahsdf)');
+  //   // Analyze();
+  // }
+
+  sendText(text) {
     console.log('text', text);
+    Analyze(text);
   }
 
   displayAnalysis(text) {
@@ -23,7 +31,7 @@ class App extends Component {
         <h1 className="App__title">Text Analytics API Demo</h1>
         <h3 className="App__textbox-label">Enter Phrase</h3>
         <TextForm
-          printText={this.printText}
+          sendText={this.sendText}
         />
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />

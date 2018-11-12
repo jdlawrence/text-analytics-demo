@@ -1,57 +1,37 @@
 import * as R from 'ramda';
 
 const Analyze = (inputText) => {
-  var initObject = {
-    method: 'POST',
-    headers: new Headers(),
-    mode: 'cors',
-    body: "{}"
-  }
-
   const accessKey = process.env.REACT_APP_ANALYTICS_KEY;
 
-  const message = {
+  const message2 = {
     documents: [
       {
         id: 1,
         language: 'en',
-        text: 'The fetch API works really great for handling asynchronous results!',
+        text: 'All I want for Christmas is my two front teeth!!'
       }
     ]
   }
 
-  const text = 'The fetch API works really great for handling asynchronous results';
-
   const mapIndexed = R.addIndex(R.map);
 
-  const message2 = mapIndexed((val, idx) => {
+  const message = mapIndexed((val, idx) => {
     return {
-      id: idx,
+      id: idx + 1,
       language: 'en',
       text: val,
     }
-  })([text]);
+  })([inputText]);
 
-  const message3 = R.addIndex(R.map)((val, idx) => {
-    return {
-      id: idx,
-      language: 'en',
-      text: val,
-    }
-  })([text]);
-  console.log('message2', message2, message3);
-  // const message3 = R.addIndex(R.map)((val, idx) => {
-  //   return {
-  //     id: idx,
-  //     language: 'en',
-  //     text: val,
-  //   })
-  //   ([text]);
+  const messageObj = {
+    documents: [message]
+  }
 
+  console.log('hhmmm', messageObj, message2, R.equals(messageObj, message2), R.difference(messageObj, message2));
   let requestParams = {
     method : 'POST',
     mode: 'cors',
-    body: JSON.stringify(message),
+    body: JSON.stringify(message2),
     headers : {
         'Ocp-Apim-Subscription-Key' : accessKey,
         "Content-Type": "application/json",

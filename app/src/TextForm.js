@@ -15,7 +15,7 @@ class TextForm extends Component {
   }
 
   handleSubmit(event) {
-    this.props.printText(this.state.value);
+    this.props.sendText(this.state.value);
     event.preventDefault();
   }
 
