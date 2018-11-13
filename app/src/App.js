@@ -6,7 +6,7 @@ import './App.scss';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.sendText = this.sendText.bind(this);
+    // this.sendText = this.sendText.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
     this.state = {
       text: '',
@@ -15,7 +15,16 @@ class App extends Component {
     };
   }
 
-  sendText(text) {
+  // sendText(text) {
+  //   console.log('***', this);
+  //   Analyze(text, this.handleResponse);
+  // }
+
+  /* The following uses a Public Class Method that is an ES*** feature
+   * and won't work in all cases. I could have used the commented out code
+   * above
+   */
+  sendText = (text) => {
     Analyze(text, this.handleResponse);
   }
 
