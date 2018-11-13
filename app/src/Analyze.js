@@ -27,11 +27,17 @@ const Analyze = (inputText, handleResponse) => {
     }
   };
 
-  const extractKeyPhrasesString = R.pipe(
+
+
+  const extractKeyPhrasesArray = R.pipe(
     R.path(['documents']),
     R.head,
     R.path(['keyPhrases']),
-    R.join(' ')
+  );
+
+  const extractKeyPhrasesString = R.pipe(
+    extractKeyPhrasesArray,
+    R.join(', '),
   );
 
   var request = new Request("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases",requestParams);
@@ -39,8 +45,12 @@ const Analyze = (inputText, handleResponse) => {
   fetch(request).then(function(result){
     return result.json()
   }).then(function(result){
+    const keyPhrasesArray = extractKeyPhrasesArray(result);
     const keyPhrasesString = extractKeyPhrasesString(result);
-    handleResponse(keyPhrasesString);
+    handleResponse({
+      keyPhrasesArray,
+      keyPhrasesString
+    });
   }).catch(function(err){
     handleResponse(err);
   });

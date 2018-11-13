@@ -10,7 +10,8 @@ class App extends Component {
     this.handleResponse = this.handleResponse.bind(this);
     this.state = {
       text: '',
-      keyPhrases: '',
+      keyPhrasesArray: [],
+      keyPhrasesString: '',
     };
   }
 
@@ -18,9 +19,12 @@ class App extends Component {
     Analyze(text, this.handleResponse);
   }
 
-  handleResponse(text) {
-    console.log('from handle', text);
-    this.setState({ keyPhrases: text })
+  handleResponse(response) {
+    console.log('from handle', response);
+    this.setState({
+      keyPhrasesArray: response.keyPhrasesArray,
+      keyPhrasesString: response.keyPhrasesString,
+    });
   }
 
   render() {
@@ -32,10 +36,10 @@ class App extends Component {
           sendText={this.sendText}
         />
         {
-          this.state.keyPhrases.length > 0 &&
+          this.state.keyPhrasesArray.length > 0 &&
           <div>
-            <p>Key Phrases:</p>
-            <span className="App__key-phrases">{this.state.keyPhrases} </span>
+            <div className="App__key-phrases-number">Total key phrases: {this.state.keyPhrasesArray.length} </div>
+            <div className="App__key-phrases">{this.state.keyPhrasesString} </div>
           </div>
         }
       </div>
