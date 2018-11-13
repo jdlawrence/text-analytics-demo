@@ -23,7 +23,7 @@ class TextForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input className="Text-form__input" type="text" value={this.state.value} onChange={this.handleChange} />
+          <textarea className="Text-form__input" type="text" value={this.state.value} onChange={this.handleChange} />
           <div className="Text-form__analyze">
             <input  type="submit" value="Submit" />
           </div>
