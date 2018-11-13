@@ -28,7 +28,6 @@ class TextForm extends Component {
             <input  type="submit" value="Submit" />
           </div>
         </form>
-        <p>hmmm</p>
       </div>
     );
   }

@@ -6,23 +6,21 @@ import './App.scss';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.sendText = this.sendText.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
     this.state = {
       text: '',
+      keyPhrases: '',
     };
   }
 
-  // componentDidMount(){
-  //   console.log('ahsdf)');
-  //   // Analyze();
-  // }
-
   sendText(text) {
-    console.log('text', text);
-    Analyze(text);
+    Analyze(text, this.handleResponse);
   }
 
-  displayAnalysis(text) {
-
+  handleResponse(text) {
+    console.log('from handle', text);
+    this.setState({ keyPhrases: text })
   }
 
   render() {
@@ -33,21 +31,13 @@ class App extends Component {
         <TextForm
           sendText={this.sendText}
         />
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header> */}
-        here
+        {
+          this.state.keyPhrases.length > 0 &&
+          <div>
+            <p>Key Phrases:</p>
+            <span className="App__key-phrases">{this.state.keyPhrases} </span>
+          </div>
+        }
       </div>
     );
   }
